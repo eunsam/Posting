@@ -4,7 +4,10 @@ import com.eunsam.Posting.dto.BoardDto;
 import com.eunsam.Posting.service.BoardService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.List;
 
 @Controller
 @AllArgsConstructor
@@ -13,7 +16,10 @@ public class BoardController {
 
     //리스트
     @GetMapping("/")
-    public String list() {
+    public String list(Model model) {
+        List<BoardDto> boardList = boardService.getBoardlist();
+
+        model.addAttribute("boardList", boardList);
         return "board/list.html";
     }
 
